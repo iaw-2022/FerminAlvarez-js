@@ -10,7 +10,7 @@ import {
 
 import Avatar from "./Avatar"
 
-function NavTripleMenu() {
+function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   return (
     <div className="flex items-center h-20 px-6 justify-between shadow-sm bg-white relative z-50">
@@ -85,4 +85,4 @@ function NavTripleMenu() {
   )
 }
 
-export default NavTripleMenu
+export default Header
