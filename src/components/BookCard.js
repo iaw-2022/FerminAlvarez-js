@@ -8,7 +8,7 @@ function BookCard(props) {
                 <h1 className="text-xl font-bold">{book.name}</h1>
                 <p className="text-sm font-semibold text-gray-600">Editorial {book.publisher}</p>
                 {book.authors.map( (author => 
-                    <p className="mt-2 text-base font-semibold text-gray-600">{author.name}</p>
+                    <p key= {author.id}className="mt-2 text-base font-semibold text-gray-600">{author.name}</p>
                 ))}
                 </div>
             </div>
