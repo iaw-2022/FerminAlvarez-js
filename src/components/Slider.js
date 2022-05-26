@@ -20,7 +20,7 @@ const theme = createTheme({
 export default function MinimumDistanceSlider() {
   const [value1, setValue1] = React.useState([0, 1000]);
 
-  const handleChange1 = (event, newValue, activeThumb) => {
+  const handleChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return;
     }
@@ -40,7 +40,7 @@ export default function MinimumDistanceSlider() {
             <Slider
                 getAriaLabel={() => 'Prices'}
                 value={value1}
-                onChange={handleChange1}
+                onChange={handleChange}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 disableSwap
