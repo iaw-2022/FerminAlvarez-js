@@ -13,7 +13,6 @@ import Avatar from "./Avatar"
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [selectedTab, setSelectedTab] = useState(window.location.pathname)
-  console.log(selectedTab)
   return (
     <header>
       <div className="flex items-center h-20 px-6 justify-between shadow-sm bg-white relative z-50">
@@ -35,12 +34,6 @@ function Header() {
             className={"block h-full flex items-center mx-4 px-2 border-b-2 transition-colors duration-300 ease-in-out hover:text-blue-400 " + (selectedTab === '/bookshops' ? 'border-primary-500' : 'border-transparent')}
           >
             <FontAwesomeIcon icon={faShop} className="mr-3" /> Librerías
-          </a>
-          <a
-            href="/authors"
-            className={"block h-full flex items-center mx-4 px-2 border-b-2 border-transparent transition-colors duration-300 ease-in-out hover:text-blue-400 " + (selectedTab === '/authors' ? 'border-primary-500' : 'border-transparent')}
-          >
-            <FontAwesomeIcon icon={faUserPen} className="mr-3" /> Autores
           </a>
         </div>
         <div className="flex-1 items-center justify-end hidden md:flex">
@@ -70,13 +63,6 @@ function Header() {
                 + (selectedTab === '/bookshops' ? 'border-b-2 border-primary-500' : '')}
               >
                 <FontAwesomeIcon icon={faShop} className="mr-3" /> Librerías
-              </a>
-              <a
-                href="/authors"
-                className={"no-underline px-2 my-2 font-medium hover:text-blue-400"
-                + (selectedTab === '/authors' ? 'border-b-2 border-primary-500' : '')}
-              >
-                <FontAwesomeIcon icon={faUserPen} className="mr-3" /> Autores
               </a>
               
               <Avatar
