@@ -1,16 +1,14 @@
 import React from "react"
 import Combobox from "./ComboBoxMultiple"
 import MinimumDistanceSlider from './Slider';
-import Badge from './Badge';
-
 
 function Filters(props) {
   let authors = props.authors;
-  let categories = props.categories;
   let bookshops = props.bookshops;
   return (
     <div className="w-full md:w-2/3 shadow p-5 rounded-lg bg-white my-6">
         <div>
+            <h3 className="text-xl mb-4">Búsqueda Avanzada</h3>
             <div className="relative">
                 <div className="absolute flex items-center ml-2 h-full">
                     <svg className="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,18 +32,15 @@ function Filters(props) {
                 <div>
                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-4">
                         <Combobox list={bookshops} placeholder="Librerías"/>
-                        <Combobox list={categories} placeholder="Categorías"/>
                         <Combobox list={authors} placeholder="Autores"/>
                         <MinimumDistanceSlider />
                     </div>
                     
                 </div>
-                <Badge text={"Librería Don Quijote"} color={"yellow"} />
+                {/* <Badge text={"Librería Don Quijote"} color={"yellow"} />
                 <Badge text={"Cúspide"} color={"yellow"} />
-                <Badge text={"Ficción"} color={"red"} />
-                <Badge text={"Fantasía"} color={"red"} />
                 <Badge text={"Brandon Sanderson"} color={"blue"} />
-                <Badge text={"$4000-$5000"} color={"green"} />
+                <Badge text={"$4000-$5000"} color={"green"} /> */}
             </div>
         </div>
   )

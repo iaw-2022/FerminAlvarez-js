@@ -12,6 +12,8 @@ import Avatar from "./Avatar"
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [selectedTab, setSelectedTab] = useState(window.location.pathname)
+  console.log(selectedTab)
   return (
     <header>
       <div className="flex items-center h-20 px-6 justify-between shadow-sm bg-white relative z-50">
@@ -24,19 +26,19 @@ function Header() {
         <div className="flex-none hidden md:flex md:justify-center md:h-full">
           <a
             href="/books"
-            className="block h-full flex items-center mx-4 px-2 border-b-2 border-transparent transition-colors duration-300 ease-in-out hover:text-blue-400"
+            className={"block h-full flex items-center mx-4 px-2 border-b-2 transition-colors duration-300 ease-in-out hover:text-blue-400 " + (selectedTab === '/books' ? 'border-primary-500' : 'border-transparent')}
           >
             <FontAwesomeIcon icon={faBook} className="mr-3" /> Libros
           </a>
           <a
             href="/bookshops"
-            className="block h-full flex items-center mx-4 px-2 border-b-2 border-primary-500 transition-colors duration-300 ease-in-out hover:text-blue-400"
+            className={"block h-full flex items-center mx-4 px-2 border-b-2 transition-colors duration-300 ease-in-out hover:text-blue-400 " + (selectedTab === '/bookshops' ? 'border-primary-500' : 'border-transparent')}
           >
             <FontAwesomeIcon icon={faShop} className="mr-3" /> Librerías
           </a>
           <a
             href="/authors"
-            className="block h-full flex items-center mx-4 px-2 border-b-2 border-transparent transition-colors duration-300 ease-in-out hover:text-blue-400"
+            className={"block h-full flex items-center mx-4 px-2 border-b-2 border-transparent transition-colors duration-300 ease-in-out hover:text-blue-400 " + (selectedTab === '/authors' ? 'border-primary-500' : 'border-transparent')}
           >
             <FontAwesomeIcon icon={faUserPen} className="mr-3" /> Autores
           </a>
@@ -57,19 +59,22 @@ function Header() {
             <div className="flex-1 flex flex-col items-center text-xl">
               <a
                 href="/books"
-                className="no-underline px-2 my-2 font-medium hover:text-blue-400"
+                className={"no-underline px-2 my-2 font-medium hover:text-blue-400"  
+                + (selectedTab === '/books' ? 'border-b-2 border-primary-500' : '')}
               >
                 <FontAwesomeIcon icon={faBook} className="mr-3" /> Libros
               </a>
               <a
                 href="/bookshops"
-                className="no-underline px-2 py-1 my-2 font-medium border-b-2 border-primary-500 hover:text-blue-400"
+                className={"no-underline px-2 py-1 my-2 font-medium border-b-2 border-primary-500 hover:text-blue-400"
+                + (selectedTab === '/bookshops' ? 'border-b-2 border-primary-500' : '')}
               >
                 <FontAwesomeIcon icon={faShop} className="mr-3" /> Librerías
               </a>
               <a
                 href="/authors"
-                className="no-underline px-2 my-2 font-medium hover:text-blue-400"
+                className={"no-underline px-2 my-2 font-medium hover:text-blue-400"
+                + (selectedTab === '/authors' ? 'border-b-2 border-primary-500' : '')}
               >
                 <FontAwesomeIcon icon={faUserPen} className="mr-3" /> Autores
               </a>
