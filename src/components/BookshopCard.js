@@ -16,7 +16,7 @@ function BookshopCard(props) {
             <h5 class="text-xl font-bold text-gray-900">
                 {name}
             </h5>
-            <p class="mt-1 text-xs font-medium text-gray-600">{city}</p>
+            <p class="mt-1 text-xs font-medium text-gray-600">{city}  {street}  {number}</p>
             </div>
 
             <div class="flex-shrink-0 hidden ml-3 sm:block">

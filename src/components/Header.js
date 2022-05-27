@@ -12,7 +12,7 @@ import Avatar from "./Avatar"
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [selectedTab, setSelectedTab] = useState(window.location.pathname)
+  const [selectedTab] = useState(window.location.pathname)
   return (
     <header>
       <div className="flex items-center h-20 px-6 justify-between shadow-sm bg-white relative z-50">
