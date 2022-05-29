@@ -1,6 +1,5 @@
 import React from "react"
 import Header from "../components/Header"
-import Footer from "../components/Footer"
 import BookCard from "../components/BookCard"
 import Filters from "../components/Filters"
 import books from "../sub/Books"
@@ -31,21 +30,19 @@ function Books() {
               </svg>
             </div>
             <div className="absolute z-10 flex-col items-start hidden w-full pb-1 bg-white shadow-lg rounded group-focus:flex">
-              <button className="w-full px-4 py-2 text-left hover:bg-gray-200" href="#">Más recientes</button>
-              <button className="w-full px-4 py-2 text-left hover:bg-gray-200" href="#">Más antiguos</button>
-              <button className="w-full px-4 py-2 text-left hover:bg-gray-200" href="#">Menor precio</button>
-              <button className="w-full px-4 py-2 text-left hover:bg-gray-200" href="#">Mayor precio</button>
+              <a className="w-full px-4 py-2 text-left hover:bg-gray-200" href="/">Más recientes</a>
+              <a className="w-full px-4 py-2 text-left hover:bg-gray-200" href="/">Más antiguos</a>
+              <a className="w-full px-4 py-2 text-left hover:bg-gray-200" href="/">Menor precio</a>
+              <a className="w-full px-4 py-2 text-left hover:bg-gray-200" href="/">Mayor precio</a>
             </div>
           </button>
         </div>
         <div className="grid 2xl:grid-cols-7 lg:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-x-6 gap-y-12 w-full mt-6">
           {books.map(((book) => (
-              <BookCard book={book}/>
+              <BookCard book={book} key={book.ISBN}/>
           )))}
         </div>
       </div>
-
-      <Footer />
     </div>
    
   )
