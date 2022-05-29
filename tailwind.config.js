@@ -8,7 +8,10 @@ module.exports = {
         primary: {
           500: '#1aa46c'
         },
-      }
+      },
+      maxWidth: {
+        '213': '213px',
+      },
     },
   },  
   plugins: [],

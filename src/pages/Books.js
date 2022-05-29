@@ -38,7 +38,7 @@ function Books() {
             </div>
           </button>
         </div>
-        <div className="grid 2xl:grid-cols-7 xl:grid-cols-7 lg:grid-cols-5 sm:grid-cols-4 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6">
+        <div className="grid 2xl:grid-cols-7 lg:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-x-6 gap-y-12 w-full mt-6">
           {books.map(((book) => (
               <BookCard book={book}/>
           )))}
