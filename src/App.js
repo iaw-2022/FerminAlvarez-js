@@ -1,6 +1,7 @@
 import './App.css';
 import Books from './pages/Books';
 import Bookshops from './pages/Bookshops';
+import Book from './pages/Book';
 import {
   Routes,
   Route,
@@ -14,6 +15,7 @@ function App() {
         <Route path = '/' element = {<Navigate to="/books" replace />} />
         <Route path = '/books' element = {<Books />} />
         <Route path = '/bookshops' element = {<Bookshops />} />
+        <Route path = '/books/:id' element = {<Book />} />
       </Routes>
     </div>
   );
