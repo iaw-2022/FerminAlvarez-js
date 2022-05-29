@@ -16,7 +16,7 @@ function Books() {
       <div className="grid place-items-center">
         <Filters authors = {authors} categories = {categories} bookshops = {bookshops}/>
       </div>
-      <div className="flex flex-col w-screen min-h-screen p-10 bg-gray-100 text-gray-800">
+      <div className="flex flex-col min-h-screen p-10 bg-gray-100 text-gray-800">
         <h1 className="text-3xl">Libros</h1>
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mt-6">
           <span className="text-sm font-semibold">1-16 de 148 Libros</span>
@@ -37,7 +37,7 @@ function Books() {
             </div>
           </button>
         </div>
-        <div className="grid 2xl:grid-cols-7 lg:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-x-6 gap-y-12 w-full mt-6">
+        <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-x-6 gap-y-12 w-full mt-6">
           {books.map(((book) => (
               <BookCard book={book} key={book.ISBN}/>
           )))}
