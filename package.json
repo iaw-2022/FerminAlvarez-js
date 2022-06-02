@@ -10,7 +10,6 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@headlessui/react": "^1.6.2",
     "@heroicons/react": "^1.0.6",
-    "@material-ui/styles": "^4.11.5",
     "@mui/material": "^5.8.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
