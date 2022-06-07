@@ -37,14 +37,16 @@ function Book(props) {
             </div>
         </div>
         <div>
-            {book.authors.map( (author => 
+            {book.authors.length>0?
+            book.authors.map( (author => 
                 <p key= {author.id} className="mt-2 text-base font-semibold text-gray-600">{author.name} <br></br></p> 
-            ))}
+            )):""}
         </div>
         <div className="container mx-auto grid-cols-1 pt-6 gap-8 mb-6">
-            {prices.map(((prices) => (
+            {prices.length>0?
+            prices.map(((prices) => (
                 <BookshopCard id={prices.Bookshop} name = {prices.name} text = {prices.link} badge_text = {"$"+prices.price} badge_color="green" link={prices.link}/>
-            )))}
+            ))):""}
         </div>
     </div>
     

@@ -12,7 +12,8 @@ function BookCard(props) {
                         <div className="p-5 h-80">
                             <h1 className="text-xl font-bold">{book.name}</h1>
                             <p className="text-sm font-semibold text-gray-600">Editorial {book.publisher != null ? book.publisher : "Desconocida"}</p>
-                            {book.authors.map( (author => 
+                            {
+                            book.authors.map( (author => 
                                 <p key= {author.id} className="mt-2 text-base font-semibold text-gray-600">{author.name}</p>
                             ))}
                             <div className="">
