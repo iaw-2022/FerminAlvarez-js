@@ -15,7 +15,7 @@ function App() {
         <Route path = '/' element = {<Navigate to="/books" replace />} />
         <Route path = '/books' element = {<Books />} />
         <Route path = '/bookshops' element = {<Bookshops />} />
-        <Route path = '/books/:id' element = {<Book />} />
+        <Route path = '/books/:ISBN' element = {<Book />} />
       </Routes>
     </div>
   );
