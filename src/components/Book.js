@@ -3,6 +3,16 @@ import Loading from "../components/Loading"
 import {useState, useEffect } from 'react'
 import BookshopCard from "../components/BookshopCard"
 
+async function getBookInfo(ISBN){
+    return fetch('https://precios-libros-api-v2.herokuapp.com/books/'+ISBN, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
+  }
+
 async function getBookPrices(ISBN){
     return fetch('https://precios-libros-api-v2.herokuapp.com/books/'+ISBN+"/prices", {
       method: 'GET',
@@ -18,6 +28,7 @@ export default function Book(props) {
 
     const [error, setError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoadedBook, setIsLoadedBook] = useState(false);
     const [prices, setPrices] = useState([]);
 
     useEffect(() => {
@@ -34,9 +45,23 @@ export default function Book(props) {
                 if(data !== null){
                     setIsLoaded(true);
                     setPrices(data)
+                    searchBookInfo()
                 }else{
                     setIsLoaded(true);
                     setError(true);
+                }
+            },
+        )
+    }
+    function searchBookInfo(){
+        getBookInfo(book.ISBN)
+        .then(res => res.ok ? res.json() : null )
+        .then(
+            (data) => {
+                if(data !== null){
+                    setIsLoadedBook(true)
+                    book.min_price = data[0].min_price
+                    console.log(book.min_price)
                 }
             },
         )
@@ -45,30 +70,36 @@ export default function Book(props) {
     return (
     <div>
         <div className="flex items-center justify-center my-8">
-            <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="w-213 bg-cover bg-landscape">
+            <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
+                
+                <div className="w-213 bg-cover bg-landscape">
                     <img className ="h-60 w-60" src={book.image_link != null ? book.image_link : require("../assets/covert-not-available.png")} alt=""></img>
                 </div>
-                <div class="w-2/3 p-4">
-                    <h1 class="text-gray-900 font-semibold text-2xl">
+                <div className="w-2/3 p-4">
+                    <h1 className="text-gray-900 font-semibold text-2xl">
                         {book.name}
                     </h1>
-                    <p class="mt-1 text-gray-700 font-semibold text-sm">
+                    <p className="mt-1 text-gray-700 font-semibold text-sm">
                         Editorial {book.publisher != null ? book.publisher : "Desconocida"}
                     </p>
-                    <p class="mt-1 text-gray-600 font-semibold text-sm">
+                    <p className="mt-1 text-gray-600 font-semibold text-sm">
                         Categoría: <br></br>{book.category != null ? book.category : "Desconocida"}
                     </p>
-                    {book.min_price != null ?
-                        <div class="flex item-center justify-center mt-2">
+                    {isLoadedBook ?  
+                        book.min_price != null ?
+                        <div className="flex item-center justify-center mt-2">
                             <div>
-                                <p class="text-sm font-semibold text-gray-600">Mejor precio</p>
+                                <p className="text-sm font-semibold text-gray-600">Mejor precio</p>
                                 <Badge color="green" text={"$"+book.min_price}/>
                             </div>
                         </div>
                         :
                         <Badge color="red" text="Sin stock"/>
-                    }
+                    : 
+                        <div>
+                            <p className="text-sm font-semibold text-gray-600">Mejor precio</p>
+                            <Badge color="green" text={"..."}/>
+                        </div>}
                     <p className="text-sm font-semibold text-gray-600">ISBN:{book.ISBN}</p>  
                 </div>
             </div>
@@ -82,7 +113,7 @@ export default function Book(props) {
         <div className="container mx-auto grid-cols-1 pt-6 gap-8 mb-6">
             {isLoaded ?
             error || prices.length === 0 ?
-            <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
+            <div className="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
                 No pudimos encontrar precios
             </div>:
             prices.map(((prices) => (
