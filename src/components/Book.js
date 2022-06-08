@@ -68,7 +68,8 @@ export default function Book(props) {
                         </div>
                         :
                         <Badge color="red" text="Sin stock"/>
-                    }  
+                    }
+                    <p className="text-sm font-semibold text-gray-600">ISBN:{book.ISBN}</p>  
                 </div>
             </div>
         </div>
