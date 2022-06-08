@@ -79,10 +79,15 @@ export default function Book(props) {
             )):""}
         </div>
         <div className="container mx-auto grid-cols-1 pt-6 gap-8 mb-6">
-            {isLoaded ? prices.length>0?
+            {isLoaded ?
+            error || prices.length === 0 ?
+            <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
+                No pudimos encontrar precios
+            </div>:
             prices.map(((prices) => (
                 <BookshopCard id={prices.Bookshop} name = {prices.name} text = {prices.link} badge_text = {"$"+prices.price} badge_color="green" link={prices.link}/>
-            ))):"":<Loading/>}
+            ))):
+            <Loading/>}
         </div>
     </div>
     
