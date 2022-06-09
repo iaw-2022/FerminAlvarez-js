@@ -82,8 +82,8 @@ export default function Book(props) {
                     <p className="mt-1 text-gray-700 font-semibold text-sm">
                         Editorial {book.publisher != null ? book.publisher : "Desconocida"}
                     </p>
-                    <p className="mt-1 text-gray-600 font-semibold text-sm">
-                        Categoría: <br></br>{book.category != null ? book.category : "Desconocida"}
+                    <p class="mt-1 text-gray-600 font-semibold text-sm">
+                        Categoría: <br></br>{book.category !== "NOT_DEFINED_CATEGORY" ? book.category : "Desconocida"}
                     </p>
                     {isLoadedBook ?  
                         book.min_price != null ?
