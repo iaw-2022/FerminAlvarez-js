@@ -61,7 +61,6 @@ export default function Book(props) {
                 if(data !== null){
                     setIsLoadedBook(true)
                     book.min_price = data[0].min_price
-                    console.log(book.min_price)
                 }
             },
         )
@@ -73,7 +72,7 @@ export default function Book(props) {
             <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
                 
                 <div className="w-213 bg-cover bg-landscape">
-                    <img className ="h-60 w-60" src={book.image_link != null ? book.image_link : require("../assets/covert-not-available.png")} alt=""></img>
+                    <img className ="h-full max-w-60" src={book.image_link != null ? book.image_link : require("../assets/covert-not-available.png")} alt=""></img>
                 </div>
                 <div className="w-2/3 p-4">
                     <h1 className="text-gray-900 font-semibold text-2xl">

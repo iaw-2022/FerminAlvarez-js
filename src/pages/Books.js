@@ -3,7 +3,6 @@ import Header from "../components/Header"
 import BookCard from "../components/BookCard"
 import Filters from "../components/Filters"
 import authors from "../sub/Authors"
-import categories from "../sub/Categories"
 import bookshops from "../sub/Bookshops"
 import Hero from "../components/Hero"
 import Loading from "../components/Loading"
@@ -67,7 +66,6 @@ export default function Books() {
   const [searchName, setSearchName]= useState("");
   const [books, setBooks] = useState([]);
   const [order, setOrder] = useState("Ordenar por:");
-
   useEffect(() => {
     search()
   }, []);
@@ -109,10 +107,10 @@ export default function Books() {
         <Header />
         <Hero title1="Encuentra el libro" title2="que quieras, al" highlight="mejor precio" subtitle1="Puedes realizar una búsqueda más avanzada utilizando los filtros que se encuentran debajo." subtitle2 ="En caso de que el libro no se encuentre, intenta buscando por ISBN" placeholder="ISBN"/>
         <div className="grid place-items-center">
-          <Filters authors = {authors} categories = {categories} bookshops = {bookshops} booksMinPrice={setMinPrice} 
+          <Filters authors = {authors} bookshops = {bookshops} booksMinPrice={setMinPrice} 
           booksMaxPrice={setMaxPrice} search={search} setSelectedAuthors={setSelectedAuthors} setSelectedBookshops={setSelectedBookshops} setSearchName={setSearchName} />
         </div>
-        <div className="flex flex-col min-h-screen p-10 bg-gray-100 text-gray-800">
+        <div className="flex flex-col  p-10 bg-gray-100 text-gray-800">
           <h1 className="text-3xl">Libros</h1>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mt-6">
             <span className="text-sm font-semibold">{books.length} Libros</span>
