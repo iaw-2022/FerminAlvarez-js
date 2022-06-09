@@ -21,7 +21,7 @@ function Book(props) {
                         Editorial {book.publisher != null ? book.publisher : "Desconocida"}
                     </p>
                     <p class="mt-1 text-gray-600 font-semibold text-sm">
-                        Categoría: <br></br>{book.category != null ? book.category : "Desconocida"}
+                        Categoría: <br></br>{book.category !== "NOT_DEFINED_CATEGORY" ? book.category : "Desconocida"}
                     </p>
                     {book.min_price != null ?
                         <div class="flex item-center justify-center mt-2">
