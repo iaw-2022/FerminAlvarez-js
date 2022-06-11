@@ -52,8 +52,12 @@ export default function Filters(props) {
 
                 <div>
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
+                        {bookshops.length > 0 ? 
                         <Combobox list={bookshops} placeholder="Librerías" selected = {changeBookshopsSelected}/>
+                        :""}
+                        {authors.length > 0 ? 
                         <Combobox list={authors} placeholder="Autores" selected = {changeAuthorsSelected}/>
+                        :""}
                         <MinimumDistanceSlider booksMinPrice = {changeMinPriceSelected} booksMaxPrice = {changeMaxPriceSelected}/>
                     </div>
                     

@@ -2,8 +2,6 @@ import {useState, useEffect } from 'react'
 import Header from "../components/Header"
 import BookCard from "../components/BookCard"
 import Filters from "../components/Filters"
-import authors from "../sub/Authors"
-import bookshops from "../sub/Bookshops"
 import Hero from "../components/Hero"
 import Loading from "../components/Loading"
 
@@ -56,9 +54,33 @@ async function callBookAPI(min_price, max_price, selectedAuthors, selectedBooksh
       body: createBody(name, authorsIDS, bookshopsIDS, min_price, max_price)
     });
 }
+
+async function callAuthorsApi(){
+  return fetch('https://precios-libros-api-v2.herokuapp.com/authors', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  });
+}
+
+async function callBookshopsApi(){
+  return fetch('https://precios-libros-api-v2.herokuapp.com/bookshops', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  });
+}
 export default function Books() {
   const [error, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoadedAuthors, setIsLoadedAuthors] = useState(false);
+  const [isLoadedBookshops, setIsLoadedBookshops] = useState(false);
+  const [bookshops, setBookshops] = useState(false);
+  const [authors, setAuthors] = useState(false);
   const [minPrice, setMinPrice]= useState(0);
   const [maxPrice, setMaxPrice]= useState(10000);
   const [selectedAuthors, setSelectedAuthors]= useState(0);
@@ -68,6 +90,8 @@ export default function Books() {
   const [order, setOrder] = useState("Ordenar por:");
   useEffect(() => {
     search()
+    getAuthors()
+    getBookshops()
   }, []);
 
   function search(){
@@ -88,6 +112,44 @@ export default function Books() {
       )
   }
 
+  function getAuthors(){
+    setIsLoadedAuthors(false);
+    setError(false);
+      callAuthorsApi()
+      .then(res => res.ok ? res.json() : null )
+      .then(
+          (data) => {
+            if(data !== null){
+              setIsLoadedAuthors(true);
+              setAuthors(data)
+            }else{
+              setIsLoadedAuthors(true);
+              setError(true);
+            }
+          },
+      )
+  }
+
+  function getBookshops(){
+    setIsLoadedBookshops(false);
+    setError(false);
+    callBookshopsApi()
+      .then(res => res.ok ? res.json() : null )
+      .then(
+          (data) => {
+            if(data !== null){
+              setIsLoadedBookshops(true);
+              setBookshops(data)
+            }else{
+              setIsLoadedBookshops(true);
+              setError(true);
+            }
+          },
+      )
+  }
+
+  
+
   function orderByPriceMin(){
     books.sort((a, b) => a.min_price - b.min_price);
   } 
@@ -107,8 +169,10 @@ export default function Books() {
         <Header />
         <Hero title1="Encuentra el libro" title2="que quieras, al" highlight="mejor precio" subtitle1="Puedes realizar una búsqueda más avanzada utilizando los filtros que se encuentran debajo." subtitle2 ="En caso de que el libro no se encuentre, intenta buscando por ISBN" placeholder="ISBN"/>
         <div className="grid place-items-center">
+          {
           <Filters authors = {authors} bookshops = {bookshops} booksMinPrice={setMinPrice} 
           booksMaxPrice={setMaxPrice} search={search} setSelectedAuthors={setSelectedAuthors} setSelectedBookshops={setSelectedBookshops} setSearchName={setSearchName} />
+          }
         </div>
         <div className="flex flex-col  p-10 bg-gray-100 text-gray-800">
           <h1 className="text-3xl">Libros</h1>
