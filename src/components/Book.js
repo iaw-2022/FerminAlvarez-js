@@ -116,7 +116,7 @@ export default function Book(props) {
                 No pudimos encontrar precios
             </div>:
             prices.map(((prices) => (
-                <BookshopCard id={prices.Bookshop} name = {prices.name} text = {prices.link} badge_text = {"$"+prices.price} badge_color="green" link={prices.link}/>
+                <BookshopCard key={prices.Bookshop} id={prices.Bookshop} name = {prices.name} text = {prices.link} badge_text = {"$"+prices.price} badge_color="green" link={prices.link}/>
             ))):
             <Loading/>}
         </div>

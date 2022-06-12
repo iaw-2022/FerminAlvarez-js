@@ -6,7 +6,7 @@ function BookshopCard(props) {
     const badge_text = props.badge_text;
     const link = props.link;
     return (
-    <a className="relative block p-8 overflow-hidden border border-gray-100 rounded-lg" href={link}>
+    <a className="relative block p-8 overflow-hidden border border-gray-100 rounded-lg" href={link} target="_blank">
         <span
             className="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
         ></span>
