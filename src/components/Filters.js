@@ -72,9 +72,6 @@ export default function Filters(props) {
                 authorsSelecteds.map((author) => (
                     <Badge text={author.name} color={"blue"} />
                 )):""}
-                {
-                  console.log("MIN:"+minPrice)
-                }{console.log("MAX:"+maxPrice)}
                   
                 {minPrice == 0 && maxPrice == 10000?
                 ""

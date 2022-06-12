@@ -169,7 +169,7 @@ export default function Books() {
         <div className="flex flex-col  p-10 bg-gray-100 text-gray-800">
           <h1 className="text-3xl">Libros</h1>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mt-6">
-            <span className="text-sm font-semibold">{books.length} Libros</span>
+            <span className="text-sm font-semibold">{!error ? books.length : 0} Libros</span>
               <div className="flex-none p-2">
                   <button onClick={() => showDropdownOptions()} className="flex flex-row justify-between w-48 px-2 py-2 text-gray-700 bg-white border-2 border-white rounded-md shadow focus:outline-none focus:border-blue-600">
                       <span className="select-none">{order}</span>
