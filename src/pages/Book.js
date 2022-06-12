@@ -1,5 +1,4 @@
 import React from "react"
-import Header from "../components/Header"
 import BookComponent from "../components/Book"
 import Loading from "../components/Loading"
 import { useParams } from "react-router-dom";
@@ -48,9 +47,8 @@ export default function Book() {
 
   return (
     <div> 
-      <Header />
       {error? 
-        <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
+        <div className="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
             No pudimos encontrar el libro
         </div>
       :isLoaded? 

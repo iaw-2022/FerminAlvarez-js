@@ -1,5 +1,4 @@
 import {useState, useEffect } from 'react'
-import Header from "../components/Header"
 import BookCard from "../components/BookCard"
 import Filters from "../components/Filters"
 import Hero from "../components/Hero"
@@ -158,7 +157,6 @@ export default function Books() {
   
     return (
       <div> 
-        <Header />
         <Hero title1="Encuentra el libro" title2="que quieras, al" highlight="mejor precio" subtitle1="Puedes realizar una búsqueda más avanzada utilizando los filtros que se encuentran debajo." subtitle2 ="En caso de que el libro no se encuentre, intenta buscando por ISBN" placeholder="ISBN"/>
         <div className="grid place-items-center">
           {

@@ -80,7 +80,7 @@ export default function Book(props) {
                     <p className="mt-1 text-gray-700 font-semibold text-sm">
                         Editorial {book.publisher != null ? book.publisher : "Desconocida"}
                     </p>
-                    <p class="mt-1 text-gray-600 font-semibold text-sm">
+                    <p className="mt-1 text-gray-600 font-semibold text-sm">
                         Categoría: <br></br>{book.category !== "NOT_DEFINED_CATEGORY" ? book.category : "Desconocida"}
                     </p>
                     {error?  

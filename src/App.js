@@ -2,6 +2,7 @@ import './App.css';
 import Books from './pages/Books';
 import Bookshops from './pages/Bookshops';
 import Book from './pages/Book';
+import Header from './components/Header';
 import {
   Routes,
   Route,
@@ -11,6 +12,7 @@ import {
 function App() {
   return (
     <div className="App">
+    <Header />
       <Routes>
         <Route path = '/' element = {<Navigate to="/books" replace />} />
         <Route path = '/books' element = {<Books />} />
