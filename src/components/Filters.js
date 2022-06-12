@@ -72,7 +72,14 @@ export default function Filters(props) {
                 authorsSelecteds.map((author) => (
                     <Badge text={author.name} color={"blue"} />
                 )):""}
-                <Badge text={minPrice +  " - " + maxPrice} color="green"/>
+                {
+                  console.log("MIN:"+minPrice)
+                }{console.log("MAX:"+maxPrice)}
+                  
+                {minPrice == 0 && maxPrice == 10000?
+                ""
+                : <Badge text={minPrice +  " - " + maxPrice} color="green"/>
+                }
             </div>
             <button onClick={props.search}
                 className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md md:w-auto hover:text-deep-purple-900 bg-green-400 hover:bg-teal-accent-700 focus:shadow-outline focus:outline-none"

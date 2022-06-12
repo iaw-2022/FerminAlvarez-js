@@ -27,7 +27,7 @@ export default function Book(props) {
     let book = props.book;
 
     const [error, setError] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoadedPrices, setIsLoadedPrices] = useState(false);
     const [isLoadedBook, setIsLoadedBook] = useState(false);
     const [prices, setPrices] = useState([]);
 
@@ -36,18 +36,17 @@ export default function Book(props) {
       }, []);
     
     function searchPrices(){
-        setIsLoaded(false);
         setError(false);
         getBookPrices(book.ISBN)
         .then(res => res.ok ? res.json() : null )
         .then(
             (data) => {
                 if(data !== null){
-                    setIsLoaded(true);
+                    setIsLoadedPrices(true);
                     setPrices(data)
                     searchBookInfo()
                 }else{
-                    setIsLoaded(true);
+                    setIsLoadedPrices(true);
                     setError(true);
                 }
             },
@@ -84,21 +83,22 @@ export default function Book(props) {
                     <p class="mt-1 text-gray-600 font-semibold text-sm">
                         Categoría: <br></br>{book.category !== "NOT_DEFINED_CATEGORY" ? book.category : "Desconocida"}
                     </p>
-                    {isLoadedBook ?  
-                        book.min_price != null ?
-                        <div className="flex item-center justify-center mt-2">
-                            <div>
-                                <p className="text-sm font-semibold text-gray-600">Mejor precio</p>
-                                <Badge color="green" text={"$"+book.min_price}/>
-                            </div>
-                        </div>
-                        :
+                    {error?  
                         <Badge color="red" text="Sin stock"/>
-                    : 
+                    :
+                        isLoadedBook?
+                            <div className="flex item-center justify-center mt-2">
+                                <div>
+                                    <p className="text-sm font-semibold text-gray-600">Mejor precio</p>
+                                    <Badge color="green" text={"$"+book.min_price}/>
+                                </div>
+                            </div>
+                        :
                         <div>
                             <p className="text-sm font-semibold text-gray-600">Mejor precio</p>
                             <Badge color="green" text={"..."}/>
-                        </div>}
+                        </div>
+                    }
                     <p className="text-sm font-semibold text-gray-600">ISBN:{book.ISBN}</p>  
                 </div>
             </div>
@@ -110,7 +110,7 @@ export default function Book(props) {
             )):""}
         </div>
         <div className="container mx-auto grid-cols-1 pt-6 gap-8 mb-6">
-            {isLoaded ?
+            {isLoadedPrices ?
             error || prices.length === 0 ?
             <div className="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
                 No pudimos encontrar precios

@@ -24,7 +24,7 @@ function mapBookshopsID(selectedBookshops){
 }
 
 function createBody(name, authorsIDS, bookshopsIDS, min_price, max_price){
-  if (min_price !== 0 && max_price !== 10000){
+  if (min_price !== 0 || max_price !== 10000){
     return JSON.stringify(
       {"name": name,
       "authors": authorsIDS,
@@ -77,8 +77,6 @@ async function callBookshopsApi(){
 export default function Books() {
   const [error, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isLoadedAuthors, setIsLoadedAuthors] = useState(false);
-  const [isLoadedBookshops, setIsLoadedBookshops] = useState(false);
   const [bookshops, setBookshops] = useState(false);
   const [authors, setAuthors] = useState(false);
   const [minPrice, setMinPrice]= useState(0);
@@ -113,17 +111,14 @@ export default function Books() {
   }
 
   function getAuthors(){
-    setIsLoadedAuthors(false);
     setError(false);
       callAuthorsApi()
       .then(res => res.ok ? res.json() : null )
       .then(
           (data) => {
             if(data !== null){
-              setIsLoadedAuthors(true);
               setAuthors(data)
             }else{
-              setIsLoadedAuthors(true);
               setError(true);
             }
           },
@@ -131,17 +126,14 @@ export default function Books() {
   }
 
   function getBookshops(){
-    setIsLoadedBookshops(false);
     setError(false);
     callBookshopsApi()
       .then(res => res.ok ? res.json() : null )
       .then(
           (data) => {
             if(data !== null){
-              setIsLoadedBookshops(true);
               setBookshops(data)
             }else{
-              setIsLoadedBookshops(true);
               setError(true);
             }
           },
