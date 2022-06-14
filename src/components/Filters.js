@@ -1,10 +1,41 @@
+import {useState } from 'react'
 import React from "react"
 import Combobox from "./ComboBoxMultiple"
 import MinimumDistanceSlider from './Slider';
+import Badge from '../components/Badge';
 
-function Filters(props) {
+export default function Filters(props) {
   let authors = props.authors;
   let bookshops = props.bookshops;
+
+  function changeAuthorsSelected (value){
+    setAuthorsSelecteds(value);
+    props.setSelectedAuthors(value);
+  }
+
+  function changeBookshopsSelected (value){
+    setBookshopsSelecteds(value);
+    props.setSelectedBookshops(value);
+  }
+
+  function changeMinPriceSelected(min){
+    props.booksMinPrice(min)
+    setMinPrice(min)
+  }
+
+  function changeMaxPriceSelected(max){
+    props.booksMaxPrice(max)
+    setMaxPrice(max)
+  }
+
+  function changeTitle(event){
+    props.setSearchName(event.target.value)
+  }
+
+  const [authorsSelecteds, setAuthorsSelecteds] = useState([]);
+  const [bookshopsSelecteds, setBookshopsSelecteds] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(10000);
   return (
     <div className="w-full md:w-2/3 shadow p-5 rounded-lg bg-white my-6">
         <div>
@@ -16,24 +47,42 @@ function Filters(props) {
                     </svg>
                 </div>
 
-                <input type="text" placeholder="Buscar un libro por su nombre..." className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"></input>
+                <input type="text" placeholder="Buscar un libro por su nombre..." className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" onChange={changeTitle}></input>
                 </div>
 
                 <div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-4">
-                        <Combobox list={bookshops} placeholder="Librerías"/>
-                        <Combobox list={authors} placeholder="Autores"/>
-                        <MinimumDistanceSlider />
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
+                        {bookshops.length > 0 ? 
+                        <Combobox list={bookshops} placeholder="Librerías" selected = {changeBookshopsSelected}/>
+                        :""}
+                        {authors.length > 0 ? 
+                        <Combobox list={authors} placeholder="Autores" selected = {changeAuthorsSelected}/>
+                        :""}
+                        <MinimumDistanceSlider booksMinPrice = {changeMinPriceSelected} booksMaxPrice = {changeMaxPriceSelected}/>
                     </div>
                     
                 </div>
-                {/* <Badge text={"Librería Don Quijote"} color={"yellow"} />
-                <Badge text={"Cúspide"} color={"yellow"} />
-                <Badge text={"Brandon Sanderson"} color={"blue"} />
-                <Badge text={"$4000-$5000"} color={"green"} /> */}
+
+                {bookshopsSelecteds.length>0?
+                bookshopsSelecteds.map((bookshop) => (
+                    <Badge text={bookshop.name} color={"yellow"} />
+                )):""}
+
+                {authorsSelecteds.length>0?
+                authorsSelecteds.map((author) => (
+                    <Badge text={author.name} color={"blue"} />
+                )):""}
+                  
+                {minPrice == 0 && maxPrice == 10000?
+                ""
+                : <Badge text={minPrice +  " - " + maxPrice} color="green"/>
+                }
             </div>
+            <button onClick={props.search}
+                className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md md:w-auto hover:text-deep-purple-900 bg-green-400 hover:bg-teal-accent-700 focus:shadow-outline focus:outline-none"
+                >
+                    Buscar 
+            </button>
         </div>
   )
 }
-
-export default Filters

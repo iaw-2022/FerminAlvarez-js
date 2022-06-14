@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faBook,
   faShop,
-  faUserPen,
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons"
@@ -16,12 +15,12 @@ function Header() {
   return (
     <header>
       <div className="flex items-center h-20 px-6 justify-between shadow-sm bg-white relative z-50">
-        <button className="flex-1 no-underline block h-8">
+        <div className="flex-1 no-underline block h-8">
           <img
             src={require("../assets/logo.png")}
             className="h-full" alt="logo"
           />
-        </button>
+        </div>
         <div className="flex-none hidden md:flex md:justify-center md:h-full">
           <a
             href="/books"

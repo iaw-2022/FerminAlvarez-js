@@ -17,8 +17,10 @@ const theme = createTheme({
     },
   });
 
-export default function MinimumDistanceSlider() {
-  const [value1, setValue1] = React.useState([0, 1000]);
+export default function MinimumDistanceSlider(props) {
+  const booksMinPrice = props.booksMinPrice
+  const booksMaxPrice = props.booksMaxPrice
+  const [value, setValue] = React.useState([0, 10000]);
 
   const handleChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -26,9 +28,11 @@ export default function MinimumDistanceSlider() {
     }
 
     if (activeThumb === 0) {
-      setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
+      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+      booksMinPrice(value[0]);
     } else {
-      setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
+      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+      booksMaxPrice(value[1])
     }
   };
 
@@ -39,7 +43,7 @@ export default function MinimumDistanceSlider() {
         <label> Precio</label>
             <Slider
                 getAriaLabel={() => 'Prices'}
-                value={value1}
+                value={value}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}

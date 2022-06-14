@@ -18,9 +18,11 @@ export default function ComboBox(props) {
                 .replace(/\s+/g, '')
                 .includes(query.toLowerCase().replace(/\s+/g, ''))
             )
+
+    
     return (
         <div className="">
-        <Combobox value={selectedPeople} onChange={setSelectedPeople} multiple>
+        <Combobox value={selectedPeople} onChange={(value) => {setSelectedPeople(value); props.selected(value)}} multiple>
             <Combobox.Label>{placeholder}</Combobox.Label>
             
             <div className="relative mt-1">

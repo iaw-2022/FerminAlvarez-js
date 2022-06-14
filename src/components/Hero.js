@@ -1,4 +1,5 @@
-function Hero (props) {
+import {useState } from 'react'
+export default function Hero (props) {
   let title1 = props.title1
   let title2 = props.title2
   let title3 = props.title3
@@ -6,6 +7,12 @@ function Hero (props) {
   let subtitle1 = props.subtitle1
   let subtitle2 = props.subtitle2
   let placeholder = props.placeholder
+  const [searchName, setSearchName]= useState("");
+
+  function changeISBN(event){
+    setSearchName(event.target.value)
+  }
+
     return (
       <div className="relative bg-blue-500">
         <div className="absolute inset-x-0 bottom-0">
@@ -40,11 +47,12 @@ function Hero (props) {
                     <input
                       placeholder="ISBN"
                       required
-                      type="text"
+                      type="number"
                       className="flex-grow w-full h-12 px-4 mb-3 text-gray-600  transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-deep-purple-900 focus:border-teal-accent-700 focus:outline-none focus:shadow-outline"
+                      onChange={changeISBN}
                     />
                     <a
-                      href="/"
+                      href={"books/"+searchName}
                       className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md md:w-auto hover:text-deep-purple-900 bg-green-400 hover:bg-teal-accent-700 focus:shadow-outline focus:outline-none"
                     >
                       Buscar 
@@ -63,4 +71,3 @@ function Hero (props) {
       </div>
     );
   };
-export default Hero

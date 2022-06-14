@@ -2,6 +2,7 @@ import './App.css';
 import Books from './pages/Books';
 import Bookshops from './pages/Bookshops';
 import Book from './pages/Book';
+import Header from './components/Header';
 import {
   Routes,
   Route,
@@ -11,11 +12,12 @@ import {
 function App() {
   return (
     <div className="App">
+    <Header />
       <Routes>
         <Route path = '/' element = {<Navigate to="/books" replace />} />
         <Route path = '/books' element = {<Books />} />
         <Route path = '/bookshops' element = {<Bookshops />} />
-        <Route path = '/books/:id' element = {<Book />} />
+        <Route path = '/books/:ISBN' element = {<Book />} />
       </Routes>
     </div>
   );
