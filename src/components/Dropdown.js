@@ -21,13 +21,13 @@ export default function Dropdown(props) {
             <div className="px-1 py-1 ">
             <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <a
                     className={`${
                       active ? 'bg-primary-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
+                  href={props.link}>
                     Favoritos
-                  </button>
+                  </a>
                 )}
             </Menu.Item>
             <Menu.Item>

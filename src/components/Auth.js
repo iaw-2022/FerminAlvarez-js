@@ -52,7 +52,7 @@ function Avatar({
         </div>
             : isAuthenticated ? (
                 <div className={finalClass} {...newProps}>
-                    <Dropdown image={user.picture} logout={logout}/>
+                    <Dropdown image={user.picture} logout={logout} link={"/mybooks"}/>
                 </div>
             ) : (
                 <button onClick={loginWithPopup} className="inline-flex items-center justify-center w-full h-8 px-2 font-semibold tracking-wide text-black transition duration-200 rounded shadow-md md:w-auto bg-green-400 focus:outline-none">Iniciar sesión</button>
