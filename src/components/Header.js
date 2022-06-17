@@ -7,7 +7,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons"
 
-import Avatar from "./Avatar"
+import Auth from "./Auth"
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -36,10 +36,7 @@ function Header() {
           </a>
         </div>
         <div className="flex-1 items-center justify-end hidden md:flex">
-          <Avatar
-            image="https://gustui.s3.amazonaws.com/avatar.png"
-            className="cursor-pointer my-2"
-          />
+          <Auth/>
         </div>
         <FontAwesomeIcon
           icon={mobileOpen ? faTimes : faBars}
@@ -64,11 +61,7 @@ function Header() {
                 <FontAwesomeIcon icon={faShop} className="mr-3" /> Librerías
               </a>
               
-              <Avatar
-                image="https://gustui.s3.amazonaws.com/avatar.png"
-                status="online"
-                className="cursor-pointer my-2"
-              />
+              <Auth/>
             </div>
           </div>
         )}

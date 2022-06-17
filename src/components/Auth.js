@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
+import {useAuth0} from '@auth0/auth0-react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
+import Dropdown from "./Dropdown"
 
 function Avatar({
   className = "",
@@ -37,19 +39,27 @@ function Avatar({
   if (status === "offline") statusClass += " bg-gray-200"
   else if (status === "online") statusClass += " bg-green-400"
   else if (status === "busy") statusClass += " bg-red-600"
+
+  
+  const {loginWithPopup, isLoading, logout, user, isAuthenticated} = useAuth0();
+  
+
   return (
-    <div className={finalClass} {...newProps}>
-      {image ? (
-        <img
-          src={image}
-          className="absolute left-0 top-0 w-full h-full rounded-full object-cover"
-          alt = "avatar"
-        />
-      ) : (
-        <FontAwesomeIcon icon={faUser} />
-      )}
-      {status && <div className={statusClass} />}
+    <div>
+        {isLoading?
+        <div className={finalClass} {...newProps}>
+            <FontAwesomeIcon icon={faUser} />
+        </div>
+            : isAuthenticated ? (
+                <div className={finalClass} {...newProps}>
+                    <Dropdown image={user.picture} logout={logout}/>
+                </div>
+            ) : (
+                <button onClick={loginWithPopup} className="inline-flex items-center justify-center w-full h-8 px-2 font-semibold tracking-wide text-black transition duration-200 rounded shadow-md md:w-auto bg-green-400 focus:outline-none">Iniciar sesión</button>
+            )}
+            {status && <div className={statusClass} />}
     </div>
+      
   )
 }
 

@@ -4,11 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <BrowserRouter>
+    <Auth0Provider 
+      domain ='dev-1htflm6q.us.auth0.com'
+      clientId='H3hkBesngOK5OVXpCd9vUa5rwvmk0KSt'
+      redirectUri={window.location.origin}
+      audience='https://precioslibros/api'
+      scope='openid profile email'
+      cacheLocation={'localstorage'}
+    >
     <App />
+    </Auth0Provider>
   </BrowserRouter>
 );
 
