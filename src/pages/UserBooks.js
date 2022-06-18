@@ -45,9 +45,10 @@ export default function Books() {
             if(data !== null){
               setBooks(data)
               setIsLoaded(true)
-            }else
+            }else{
               setIsLoaded(true)
               setError(true)
+            }
           },
       )
   }
