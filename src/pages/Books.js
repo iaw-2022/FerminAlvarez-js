@@ -3,6 +3,7 @@ import BookCard from "../components/BookCard"
 import Filters from "../components/Filters"
 import Hero from "../components/Hero"
 import Loading from "../components/Loading"
+import {useAuth0} from '@auth0/auth0-react'
 
 function mapAuthorsID(selectedAuthors){
   let authorsIDS = []
@@ -73,7 +74,21 @@ async function callBookshopsApi(){
     },
   });
 }
+
+async function callFavoriteBooks(token){
+  return fetch('https://precios-libros-api-v2.herokuapp.com/suscribers', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization' : 'Bearer ' +token
+    },
+  });
+}
+
+
 export default function Books() {
+  const [token, setToken] = useState("");
   const [error, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [bookshops, setBookshops] = useState(false);
@@ -82,27 +97,38 @@ export default function Books() {
   const [maxPrice, setMaxPrice]= useState(10000);
   const [selectedAuthors, setSelectedAuthors]= useState(0);
   const [selectedBookshops, setSelectedBookshops]= useState(0);
+  const [favoritesBooks, setFavoritesBooks]= useState("");
   const [searchName, setSearchName]= useState("");
   const [books, setBooks] = useState([]);
   const [order, setOrder] = useState("Ordenar por:");
+  const {getAccessTokenSilently} = useAuth0();
+
   useEffect(() => {
     search()
     getAuthors()
     getBookshops()
+    getToken().then((token) => {
+      if(token != null){
+        getFavoriteBooks(token)
+      }else
+        setIsLoaded(true)
+      
+    })
   }, []);
 
+  
   function search(){
-    setIsLoaded(false);
-    setError(false);
       callBookAPI(minPrice, maxPrice, selectedAuthors, selectedBookshops, searchName)
       .then(res => res.ok ? res.json() : null )
       .then(
           (data) => {
             if(data !== null){
-              setIsLoaded(true);
               setBooks(data)
+              if(token != null){
+                getFavoriteBooks(token).then(setIsLoaded(true))
+              }else
+                setIsLoaded(true)
             }else{
-              setIsLoaded(true);
               setError(true);
             }
           },
@@ -139,6 +165,31 @@ export default function Books() {
       )
   }
 
+  function getFavoriteBooks(token){
+    setIsLoaded(false)
+    callFavoriteBooks(token)
+      .then(res => res.ok ? res.json() : null )
+      .then(
+          (data) => {
+            if(data !== null){
+              setFavoritesBooks(data)
+              setIsLoaded(true)
+            }else
+              setIsLoaded(true)
+          },
+      )
+  }
+
+  async function getToken(){
+    let token = ""
+    try{
+      token = await getAccessTokenSilently()
+      setToken(token)
+      return token
+    }catch(err){
+      return null
+    }
+  }
   
 
   function orderByPriceMin(){
@@ -153,6 +204,14 @@ export default function Books() {
     document.getElementById("options").classList.toggle("hidden");
     document.getElementById("arrow-up").classList.toggle("hidden");
     document.getElementById("arrow-down").classList.toggle("hidden");
+  }
+
+  function isFavorite(ISBN){
+    for (var i = 0; i < favoritesBooks.length; i++) {
+      if (favoritesBooks[i].ISBN === ISBN) 
+        return true;
+    }
+    return false;
   }
   
     return (
@@ -181,13 +240,12 @@ export default function Books() {
               </div>
           </div>
 
-          {!isLoaded ? <Loading/> : ""}
-          {!error ?
+          {!isLoaded ? <Loading/> 
+          : !error ?
             <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-x-6 gap-y-12 w-full mt-6">
               {books.length>0 ?
               books.map(((book) => (
-                  <BookCard book={book} key={book.ISBN}/>
-              ))):""}
+                <BookCard book={book} key={book.ISBN} token={token} isFavorite = {isFavorite(book.ISBN)}/> ))):""}
             </div>
           : ""
         }
