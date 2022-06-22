@@ -118,14 +118,16 @@ export default function Books() {
 
   
   function search(){
-    setIsLoaded(false);
-    setError(false);
       callBookAPI(minPrice, maxPrice, selectedAuthors, selectedBookshops, searchName)
       .then(res => res.ok ? res.json() : null )
       .then(
           (data) => {
             if(data !== null){
               setBooks(data)
+              if(token != null){
+                getFavoriteBooks(token).then(setIsLoaded(true))
+              }else
+                setIsLoaded(true)
             }else{
               setError(true);
             }
